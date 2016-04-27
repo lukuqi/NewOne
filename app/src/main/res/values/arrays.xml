@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="country">
+        <item>中国</item>
+        <item>国外</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>c语言</item>
+        <item>java </item>
+        <item>php</item>
+        <item>xml</item>
+        <item>html</item>
+        <item>c语言</item>
+        <item>java </item>
+        <item>php</item>
+        <item>xml</item>
+        <item>html</item>
+        <item>c语言</item>
+    </string-array>
+
+    <string-array name="city">
+        <item>成都</item>
+        <item>重庆</item>
+    </string-array>
+
+
+</resources>

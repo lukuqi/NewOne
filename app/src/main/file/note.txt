@@ -1,0 +1,22 @@
+注意事项：
+
+设置临时变量的时候，记得注册的时候，要置空；初始化为设置为游客圈id
+
+
+
+15/12/7
+
+1.Fragment 。
+2.ViewPage
+3.TabLayout+Fragment+ViewPage
+
+主界面
+TabLayout + ViewPager + Fragment 
+
+Fragment 布局
+RecycleView   
+
+下拉刷新
+SwipeRefreshing
+
+网络检测

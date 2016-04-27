@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f1f1f1</color>
+    <color name="colorPrimaryDark">#f1f1f1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="tabSelectedTextColor">#ff00ccff</color>
+    <color name="divider_line">#c4baba</color>
+    <color name="item_divider">#FF00FFDD</color>
+    <color name="divider">#FFC4BABA</color>
+    <color name="colorName">#FF000000</color>
+    <color name="black">#f2000000</color>
+    <color name="bg_color">#f1f1f1</color>
+    <color name="news_bg_color">#e2ebf2</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#5ab1f2</color>
+    <color name="light_blue">#c7d8d9</color>
+    <color name="gray">#d1dada</color>
+    <color name="hint">#a2a7a7</color>
+    <color name="gray_dark">#d5d6d6</color>
+    <color name="alert_content_color">#FFFFFFFF</color>
+
+    <color name="alert_color">#FFFF406D</color>
+    <color name="red">#FFFF406D</color>
+</resources>

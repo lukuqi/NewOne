@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lukuqi.newone">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.NewActivity" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:label="@string/title_activity_message"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".receiver.NetworkConnReceiver" />
+
+        <service android:name=".service.NetStateService">
+            <intent-filter>
+                <action android:name="com.lukuqi.newone.service.NetStateService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.About" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RegisterOneActivity"
+            android:label="@string/title_activity_register_one"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Register"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.RegisterTwoActivity"
+            android:label="@string/title_activity_register_two"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Register" />
+        <activity
+            android:name=".activity.ForgetPwdOneActivity"
+            android:label="@string/title_activity_forget_pwd"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Register" />
+        <activity
+            android:name=".activity.ForgetPwdTwoActivity"
+            android:label="@string/title_activity_forget_pwd_two"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Register" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.AlbumActivity"
+            android:label="@string/title_activity_album"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.SchoolActivity"
+            android:label="@string/title_activity_school"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.ProfileSettingActivity"
+            android:label="@string/title_activity_profile_setting"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.NameEditActivity"
+            android:label="@string/title_activity_name_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.AreaEditActivity"
+            android:label="@string/title_activity_area_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.SignatureEditActivity"
+            android:label="@string/title_activity_signature_edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Setting"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".activity.IconEditActivity"
+            android:theme="@style/AppTheme.Setting" />
+        <activity
+            android:name=".activity.NewsActivity"
+            android:label="@string/title_activity_news"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.NewsDetailsActivity"
+            android:label="@string/title_activity_news_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ChildTimeActivity"
+            android:label="@string/title_activity_child_time"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PublishTimeActivity"
+            android:label="@string/title_activity_publish_time"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+
+        <activity android:name=".GestureImageActivity" />
+    </application>
+
+</manifest>
