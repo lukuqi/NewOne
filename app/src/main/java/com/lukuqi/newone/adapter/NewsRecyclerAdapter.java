@@ -120,7 +120,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         notifyDataSetChanged();
     }
 
-    class NewsViewHolder extends RecyclerView.ViewHolder {
+   static class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView title, content, source;
         ImageView image;
         RelativeLayout item;

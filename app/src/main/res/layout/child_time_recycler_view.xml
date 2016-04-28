@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/cIamge_time_user"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/tv_time_username"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_toRightOf="@id/cIamge_time_user"
-        android:text="一点半" />
+        android:background="@drawable/corners_bg"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tv_time_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cIamge_time_user"
-        android:text="dsfsfawefefewfa" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cIamge_time_user"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/tv_time_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_time_content"
-        android:text="shijian" />
+        <TextView
+            android:id="@+id/tv_time_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@id/cIamge_time_user"
+            android:text="一点半" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@id/tv_time_time"
-        android:background="@color/gray" />
+        <TextView
+            android:id="@+id/tv_time_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cIamge_time_user"
+            android:text="dsfsfawefefewfa" />
+
+        <TextView
+            android:id="@+id/tv_time_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_time_content"
+            android:text="shijian" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/tv_time_time"
+            android:background="@color/gray"
+            android:visibility="gone" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

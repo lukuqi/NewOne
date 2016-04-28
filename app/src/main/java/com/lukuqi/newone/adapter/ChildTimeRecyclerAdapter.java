@@ -25,15 +25,15 @@ public class ChildTimeRecyclerAdapter extends RecyclerView.Adapter<ChildTimeRecy
     private ImageLoader imageLoader;                //图片加载器
 
     public ChildTimeRecyclerAdapter(Context context, List<HashMap<String, String>> datas) {
+        layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.datas = datas;
-        layoutInflater = LayoutInflater.from(context);
+
     }
 
     @Override
     public ChildTimeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.child_time_recycler_view, parent, false);
-
         //设置组件点击波浪
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue, true);
@@ -44,7 +44,7 @@ public class ChildTimeRecyclerAdapter extends RecyclerView.Adapter<ChildTimeRecy
     }
 
     @Override
-    public void onBindViewHolder(ChildTimeViewHolder holder, int position) {
+    public void onBindViewHolder(final ChildTimeViewHolder holder, final int position) {
         holder.username.setText(datas.get(position).get("name"));
         holder.content.setText(datas.get(position).get("content"));
         holder.time.setText(datas.get(position).get("time"));
@@ -53,13 +53,24 @@ public class ChildTimeRecyclerAdapter extends RecyclerView.Adapter<ChildTimeRecy
 
     @Override
     public int getItemCount() {
-        if (datas != null) {
-            return datas.size();
+        if (datas == null) {
+            return 0;
         }
-        return 0;
+        return datas.size();
     }
 
-    class ChildTimeViewHolder extends RecyclerView.ViewHolder {
+    /**
+     * 添加item
+     *
+     * @param datas 数据
+     */
+    public void addItem(List<HashMap<String, String>> datas) {
+//        int size = datas.size();
+//        this.datas.addAll(0, datas);
+        notifyItemInserted(0);
+    }
+
+    static class ChildTimeViewHolder extends RecyclerView.ViewHolder {
         TextView username, content, time;
 
         public ChildTimeViewHolder(View itemView) {

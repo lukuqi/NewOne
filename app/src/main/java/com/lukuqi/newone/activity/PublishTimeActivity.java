@@ -1,7 +1,9 @@
 package com.lukuqi.newone.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,24 +13,42 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+import com.lukuqi.newone.Bean.Base;
 import com.lukuqi.newone.R;
+import com.lukuqi.newone.http.OkHttpUtils;
+import com.lukuqi.newone.util.ConstantVar;
+import com.lukuqi.newone.util.IP;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class PublishTimeActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE = 2;
     private EditText publish_content;
     private ImageView add;
+    private Button publish;
     private ArrayList<String> mSelectPath;
     private LinearLayout parent;
-    Context context;
+    private Context context;
+    private List<File> files = new ArrayList<>(); //上传文件list
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +67,9 @@ public class PublishTimeActivity extends AppCompatActivity {
     private void initView() {
         parent = (LinearLayout) findViewById(R.id.ll_publish_image);
         publish_content = (EditText) findViewById(R.id.et_publish_content);
+        publish = (Button) findViewById(R.id.btn_publish);
         add = (ImageView) findViewById(R.id.image_add);
+        //添加照片
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,11 +87,55 @@ public class PublishTimeActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_IMAGE);
             }
         });
+
+        //发布动态
+        publish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OkHttpUtils okHttpUtils = OkHttpUtils.getInstance(context);
+                String url = IP.IP_PARENT + "/uploadImage";
+                HashMap<String, String> paramsMap = new HashMap<>();
+                SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_TEL, MODE_PRIVATE);
+                String tel = sharedPreferences.getString("tel", "null");
+                paramsMap.put("tel", tel);
+                paramsMap.put("content", publish_content.getText().toString());
+                paramsMap.put("time", Long.toString(System.currentTimeMillis()).substring(0, 10));
+                final ProgressDialog progressDialog = ProgressDialog.show(PublishTimeActivity.this, null, "请稍等...", true, false);
+                TimerTask task = new TimerTask() {
+                    public void run() {
+                        progressDialog.dismiss();
+                        finish();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task, 500);
+
+                okHttpUtils.postMutilFileAsyn(url, paramsMap, files, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        System.out.println("res: " + e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        System.out.println("res: " + response.body().string());
+//                        String res = response.body().string();
+//                        Gson gson = new Gson();
+//                        final Base base = gson.fromJson(res, Base.class);
+//                        if (base.getCode().equals("10000")) {
+////                            progressDialog.dismiss();
+////                            finish();
+//                        }
+                    }
+                });
+
+            }
+        });
     }
 
     private View addView(String path) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-       lp.setMargins(20,20,10,20);
+        lp.setMargins(20, 20, 10, 20);
         LinearLayout view = new LinearLayout(this);
         view.setLayoutParams(lp);
         view.setOrientation(LinearLayout.HORIZONTAL);
@@ -93,16 +159,17 @@ public class PublishTimeActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 mSelectPath = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                 StringBuilder sb = new StringBuilder();
+
                 for (String p : mSelectPath) {
                     sb.append(p);
                     sb.append("\n");
                     parent.addView(addView(p));
+                    files.add(new File(p));
 //                    Bitmap bm = BitmapFactory.decodeFile(p);
 //
 //                    add.setImageBitmap(bm);
                 }
-
-                publish_content.setText(sb.toString());
+//                publish_content.setText(sb.toString());
             }
         }
     }

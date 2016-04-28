@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lukuqi.newone.Bean.UserBase;
 import com.lukuqi.newone.Bean.UserInfo;
 import com.lukuqi.newone.R;
@@ -178,7 +179,7 @@ public class ProfileFragment extends Fragment {
                 String res = response.body().string();
                 Gson gson = new Gson();
                 System.out.println("个人信息返回内容" + res);
-                UserBase user = gson.fromJson(res, UserBase.class);
+                UserBase<UserInfo> user = gson.fromJson(res, new TypeToken<UserBase<UserInfo>>(){}.getType());
                 final List<UserInfo> userInfos = user.getMessage();
                 if (user.getCode().equals("10000")) {
                     if (userInfos.get(0).getIcon() != null) {

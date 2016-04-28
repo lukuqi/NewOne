@@ -163,6 +163,36 @@ public class OkHttpUtils {
 //        mOkHttpClient.newCall(request).enqueue(responseCallback);
     }
 
+    /**
+     * 异步POST多文件上传
+     *
+     * @param url              请求地址
+     * @param paramsMap        请求参数map
+     * @param files            上传文件list
+     * @param responseCallback
+     */
+    public void postMutilFileAsyn(String url, HashMap<String, String> paramsMap, List<File> files, Callback responseCallback) {
+
+//        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("icon", file.getName(), RequestBody.create(MediaType.parse("media/type"), file)).build();
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        Set<Map.Entry<String, String>> paramsSet = paramsMap.entrySet();
+        for (Map.Entry<String, String> param : paramsSet) {
+            builder.addFormDataPart(param.getKey(), param.getValue());
+        }
+        for (File file : files) {
+            builder.addFormDataPart("image[]", file.getName(), RequestBody.create(MediaType.parse("media/type"), file));
+        }
+//        builder.addFormDataPart("icon", file.getName(), RequestBody.create(MediaType.parse("media/type"), file));
+        RequestBody requestBody = builder.build();
+        Request request = new Request.Builder().url(url).post(requestBody).build();
+        mOkHttpClient.newCall(request).enqueue(responseCallback);
+//        MultipartBuilder builder = new MultipartBuilder().type(MultipartBuilder.FORM);
+//        builder.addPart(RequestBody.create(MEDIA_TYPE_MARKDOWN, file));
+//
+//        Request request = new Request.Builder().url(url).post(builder.build()).build();
+//        mOkHttpClient.newCall(request).enqueue(responseCallback);
+    }
 
     public void postFormAsyn(String url, HashMap<String, String> paramsMap, Callback responseCallback) {
         FormBody.Builder formBody = new FormBody.Builder();

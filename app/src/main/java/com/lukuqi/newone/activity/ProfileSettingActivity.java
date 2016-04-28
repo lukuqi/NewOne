@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lukuqi.newone.Bean.Base;
 import com.lukuqi.newone.Bean.UserBase;
 import com.lukuqi.newone.Bean.UserInfo;
@@ -285,7 +286,7 @@ public class ProfileSettingActivity extends AppCompatActivity {
                     String res = response.body().string();
                     System.out.println("获取个人信息" + res);
                     Gson gson = new Gson();
-                    UserBase user = gson.fromJson(res, UserBase.class);
+                    UserBase<UserInfo> user = gson.fromJson(res, new TypeToken<UserBase<UserInfo>>(){}.getType());
                     final List<UserInfo> userInfos = user.getMessage();
                     if (user.getCode().equals("10000")) {
                         runOnUiThread(new Runnable() {

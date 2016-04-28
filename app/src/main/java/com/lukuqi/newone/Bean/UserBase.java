@@ -3,11 +3,12 @@ package com.lukuqi.newone.Bean;
 import java.util.List;
 
 /**
+ * 返回数据的基本格式
  * Created by mr.right on 2016/3/28.
  */
-public class UserBase {
+public class UserBase<T> {
     private String code;
-    private List<UserInfo> message;
+    private List<T> message;
     private String result;
 
     public String getCode() {
@@ -18,12 +19,12 @@ public class UserBase {
         this.code = code;
     }
 
-    public List<UserInfo> getMessage() {
+    public List<T> getMessage() {
         return message;
     }
 
-    public void setMessage(List<UserInfo> message) {
-        message = message;
+    public void setMessage(List<T> message) {
+        this.message = message;
     }
 
     public String getResult() {
