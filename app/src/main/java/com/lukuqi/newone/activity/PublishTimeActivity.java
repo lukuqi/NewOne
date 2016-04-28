@@ -17,10 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-import com.lukuqi.newone.Bean.Base;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.http.OkHttpUtils;
 import com.lukuqi.newone.util.ConstantVar;

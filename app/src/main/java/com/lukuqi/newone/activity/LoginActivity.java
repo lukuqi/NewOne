@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.lukuqi.newone.Bean.Base;
+import com.lukuqi.newone.bean.Base;
 import com.lukuqi.newone.MainActivity;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.http.OkHttpUtils;
@@ -28,7 +28,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Request;
 import okhttp3.Response;
 
 

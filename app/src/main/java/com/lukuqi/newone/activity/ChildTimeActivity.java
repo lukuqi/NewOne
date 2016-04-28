@@ -15,8 +15,8 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lukuqi.newone.Bean.ChildTime;
-import com.lukuqi.newone.Bean.UserBase;
+import com.lukuqi.newone.bean.ChildTime;
+import com.lukuqi.newone.bean.UserBase;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.adapter.ChildTimeRecyclerAdapter;
 import com.lukuqi.newone.http.OkHttpUtils;

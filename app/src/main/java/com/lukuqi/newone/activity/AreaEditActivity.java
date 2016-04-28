@@ -16,9 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.lukuqi.newone.Bean.City;
-import com.lukuqi.newone.Bean.Country;
-import com.lukuqi.newone.Bean.Province;
+import com.lukuqi.newone.bean.City;
+import com.lukuqi.newone.bean.Country;
+import com.lukuqi.newone.bean.Province;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.util.PullXml;
 

@@ -12,7 +12,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,9 +23,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lukuqi.newone.Bean.Base;
-import com.lukuqi.newone.Bean.UserBase;
-import com.lukuqi.newone.Bean.UserInfo;
+import com.lukuqi.newone.bean.Base;
+import com.lukuqi.newone.bean.UserBase;
+import com.lukuqi.newone.bean.UserInfo;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.http.OkHttpUtils;
 import com.lukuqi.newone.util.CheckDir;
@@ -35,18 +34,13 @@ import com.lukuqi.newone.util.IP;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Request;
 import okhttp3.Response;
 
 public class ProfileSettingActivity extends AppCompatActivity {

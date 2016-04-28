@@ -6,13 +6,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Xml;
 import android.view.MenuItem;
 
-import com.lukuqi.newone.Bean.Country;
+import com.lukuqi.newone.bean.Country;
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.util.PullXml;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IconEditActivity extends AppCompatActivity {
