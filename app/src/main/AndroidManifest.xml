@@ -132,12 +132,15 @@
         <activity
             android:name=".activity.PublishTimeActivity"
             android:label="@string/title_activity_publish_time"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:configChanges="orientation|screenSize"
-            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
-
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".GestureImageActivity" />
+        <activity
+            android:name=".activity.PhotoViewerActivity"
+            android:label="@string/title_activity_photo_viewer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

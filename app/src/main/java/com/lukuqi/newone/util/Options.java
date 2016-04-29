@@ -6,15 +6,13 @@ import com.lukuqi.newone.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 /**
+ * ImageLoader图片加载配置
  * Created by mr.right on 2016/4/29.
  */
 public class Options {
-    /**
-     * 图片加载配置
-     */
+
     public static DisplayImageOptions getListOptions() {
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 // 设置图片在下载期间显示的图片

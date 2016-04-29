@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.text.TextUtils;
 
 /**
+ * 工具类
+ * <p/>
  * Created by right on 2015/12/30.
  */
 public class Utils {

@@ -9,6 +9,7 @@
     <color name="divider">#FFC4BABA</color>
     <color name="colorName">#FF000000</color>
     <color name="black">#f2000000</color>
+    <color name="black_bg">#99000000</color>
     <color name="bg_color">#f1f1f1</color>
     <color name="news_bg_color">#e2ebf2</color>
     <color name="white">#FFFFFFFF</color>

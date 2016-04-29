@@ -24,4 +24,5 @@
     <string name="title_activity_news_details"></string>
     <string name="title_activity_child_time">时光</string>
     <string name="title_activity_publish_time"></string>
+    <string name="title_activity_photo_viewer">PhotoViewerActivity</string>
 </resources>

@@ -29,12 +29,13 @@
             android:layout_marginBottom="10dp" />
 
         <TextView
-            android:layout_marginTop="10dp"
             android:id="@+id/tv_time_content"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cIamge_time_user"
-            android:text="dsfsfawefefewfa" />
+            android:text="dsfsfawefefewfa"
+            android:layout_below="@+id/cIamge_time_user"
+            android:layout_toRightOf="@+id/cIamge_time_user"
+            android:layout_toEndOf="@+id/cIamge_time_user" />
 
         <TextView
             android:id="@+id/tv_time_time"

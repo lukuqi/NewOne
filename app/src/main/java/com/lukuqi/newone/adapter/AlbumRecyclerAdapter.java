@@ -24,6 +24,19 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
     private List<String> datas;
     private LayoutInflater layoutInflater;
     private ImageLoader imageLoader;            //图片加载器
+    public OnItemClickListener mOnItemClickListener;
+
+    //点击事件接口
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+
+//        void onItemLongClick(View view, int position);
+    }
+
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
 
 
     public AlbumRecyclerAdapter(Context context, List<String> datas) {
@@ -47,10 +60,26 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(AlbumViewHolder holder, int position) {
+    public void onBindViewHolder(final AlbumViewHolder holder, final int position) {
 //        holder.imageView.setImageBitmap();
         imageLoader.displayImage(datas.get(position), holder.imageView, Options.getListOptions());
+        if (mOnItemClickListener != null) {
+//            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//
+//                @Override
+//                public boolean onLongClick(View v) {
+//                    mOnItemClickListener.onItemLongClick(holder.itemView, position);
+//                    return false;
+//                }
+//            });
 
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(holder.itemView, position);
+                }
+            });
+        }
     }
 
     @Override
@@ -61,10 +90,11 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
         return 0;
     }
 
-    public void addPicture(List<String> datas){
+    public void addPicture(List<String> datas) {
         this.datas.addAll(datas);
         notifyItemInserted(0);
     }
+
     static class AlbumViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 

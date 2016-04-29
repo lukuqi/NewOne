@@ -1,6 +1,7 @@
 package com.lukuqi.newone.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -35,6 +36,9 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+/**
+ * 我的照片
+ */
 public class AlbumActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -64,28 +68,34 @@ public class AlbumActivity extends AppCompatActivity {
             }
         });
 
-
-        initView();
         initData();
+        initView();
+
     }
 
     private void initView() {
         context = this;
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_album);
         adapter = new AlbumRecyclerAdapter(context, datas);
+        adapter.setOnItemClickListener(new AlbumRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                System.out.println("Item clicked: " + position);
+                Intent intent = new Intent(AlbumActivity.this, PhotoViewerActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelableArrayList();
+                intent.putStringArrayListExtra("datas", (ArrayList<String>) datas);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
+        //瀑布流对象
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-        SpacesItemDecoration decoration=new SpacesItemDecoration(16);
+        //设置item间距
+        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
         recyclerView.addItemDecoration(decoration);
-//        File file = new File("http://114.215.144.131/NewOne/Upload");
-//        System.out.println("file: " + file);
-//        if (file.isDirectory()) {
-//            String[] fileNames = file.list();
-//            for (String fileName : fileNames) {
-//                System.out.println("fileName: " + fileName);
-//            }
-//        }
     }
 
     private void initData() {

@@ -1,6 +1,8 @@
 package com.lukuqi.newone.util;
 
 /**
+ * 保存常量值类
+ *
  * Created by mr.right on 2016/3/29.
  */
 public class ConstantVar {
