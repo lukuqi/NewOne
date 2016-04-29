@@ -1,4 +1,4 @@
-package com.lukuqi.newone.Bean;
+package com.lukuqi.newone.bean;
 
 import java.util.List;
 

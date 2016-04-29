@@ -1,4 +1,4 @@
-package com.lukuqi.newone.Bean;
+package com.lukuqi.newone.bean;
 
 /**
  * Created by right on 2016/3/15.

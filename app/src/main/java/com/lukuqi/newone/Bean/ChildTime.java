@@ -1,10 +1,11 @@
-package com.lukuqi.newone.Bean;
+package com.lukuqi.newone.bean;
 
 /**
  * Created by mr.right on 2016/4/28.
  */
 public class ChildTime {
-    private String tel;
+    private String name;
+    private String icon;
     private String content;
     private String picture;
     private String comment;
@@ -51,11 +52,19 @@ public class ChildTime {
         this.picture = picture;
     }
 
-    public String getTel() {
-        return tel;
+    public String getName() {
+        return name;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

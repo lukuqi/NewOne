@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.lukuqi.newone.R;
 import com.lukuqi.newone.application.MyApplication;
+import com.lukuqi.newone.util.Options;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         if (datas.get(position).get("image").isEmpty()) {
             holder.image.setVisibility(View.GONE);
         } else {
-            imageLoader.displayImage(datas.get(position).get("image"), holder.image);
+            imageLoader.displayImage(datas.get(position).get("image"), holder.image, Options.getListOptions());
         }
     }
 
