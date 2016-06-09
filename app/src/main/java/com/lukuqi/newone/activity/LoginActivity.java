@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //存储用户号码
                                 SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_TEL, MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("tel", tel);
+                                editor.putString("tel", et_phone.getText().toString());
                                 editor.apply();
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

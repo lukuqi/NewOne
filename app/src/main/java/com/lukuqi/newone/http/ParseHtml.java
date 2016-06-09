@@ -25,19 +25,22 @@ public class ParseHtml {
     public static List<HashMap<String, String>> getHtml(URL url) {
         Document doc = null;
         try {
-            doc = Jsoup.parse(url, 5000);
+            doc = Jsoup.parse(url, 5000); //设置Jsoup网页地址，访问延迟5000毫秒
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Elements divs = doc.getElementsByClass("newsList");
+        System.out.println("doc: " + doc);
+        if(doc == null )
+            return null;
+        Elements divs = doc.getElementsByClass("newsList");//获取“newsList”节点元素集
 //                    System.out.println("divs: " + divs);
-        Document doc_lis = Jsoup.parse(divs.toString());
+        Document doc_lis = Jsoup.parse(divs.toString());//解析节点元素
 //                    System.out.println("doc_lis:" + doc_lis);
 //                    List<HashMap<String, String>> list = new ArrayList<>();
         List<HashMap<String, String>> list = new ArrayList<>();
-        Elements h3 = doc_lis.getElementsByTag("h3");
+        Elements h3 = doc_lis.getElementsByTag("h3");//获取“h3”标签元素集
 //        Elements contents = doc_lis.getElementsByClass("newsDigest");
-        Elements source = doc_lis.getElementsByClass("sourceDate");
+        Elements source = doc_lis.getElementsByClass("sourceDate");//解析节点元素
         Elements contents = doc_lis.select("div[class=clearfix]");
 //                    Elements contents = doc_lis.getElementsByClass("newsDigest");
 //                    Elements source = doc_lis.getElementsByClass("sourceDate");
@@ -49,6 +52,10 @@ public class ParseHtml {
 //                        hashMap.put("source", source.get(i).getElementsByTag("span").text());
 //                        list.add(i, hashMap);
 //                    }
+        /*
+        *
+        * 添加解析内容 title：文章标题 url:网页链接地址 content:内容 image:图片链接地址 source：文章来源
+        * */
         for (int i = 0; i < h3.size(); i++) {
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("title", h3.get(i).getElementsByTag("a").text());

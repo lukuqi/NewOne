@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    `<RelativeLayout
+    <RelativeLayout
         android:id="@+id/rl_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +63,8 @@
         android:background="@drawable/profile_item_select"
         android:clickable="true"
         android:gravity="center"
-        android:text="我的学校" />
+        android:text="我的学校"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"
@@ -73,6 +74,7 @@
         android:background="@color/divider" />
 
     <TextView
+        android:layout_marginTop="60dp"
         android:id="@+id/tv_album"
         android:layout_width="match_parent"
         android:layout_height="60dp"

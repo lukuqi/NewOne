@@ -42,14 +42,14 @@
             android:text="关于NewOne" />
 
         <TextView
-            android:id="@+id/tv_contact"
+            android:id="@+id/tv_feedback"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="2px"
             android:background="@drawable/profile_item_select"
             android:clickable="true"
             android:gravity="center"
-            android:text="联系我们" />
+            android:text="用户反馈" />
 
 
         <TextView

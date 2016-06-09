@@ -105,6 +105,7 @@ public class AlbumActivity extends AppCompatActivity {
         String tel = sharedPreferences.getString("tel", "null");
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("tel", tel);
+        paramsMap.put("host",IP.HOST);
         okHttpUtils.postAsyn(url, paramsMap, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

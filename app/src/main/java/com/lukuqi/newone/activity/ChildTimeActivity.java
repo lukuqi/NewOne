@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +24,17 @@ import com.lukuqi.newone.R;
 import com.lukuqi.newone.adapter.ChildTimeRecyclerAdapter;
 import com.lukuqi.newone.bean.UserInfo;
 import com.lukuqi.newone.http.OkHttpUtils;
+import com.lukuqi.newone.util.CheckDir;
 import com.lukuqi.newone.util.ConstantVar;
 import com.lukuqi.newone.util.IP;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +61,7 @@ public class ChildTimeActivity extends AppCompatActivity {
     private CircleImageView icon;
     private TextView name;
     private String str_name;
-    private final String icon_url = "http://114.215.144.131/NewOne/Upload/";
+    private final String icon_url = IP.HOST + "/Upload/";
     private String icon_path;
 
     @Override
@@ -125,6 +130,18 @@ public class ChildTimeActivity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm:ss");
 
                 if (user.getCode().equals("10000")) {
+//                    for (int i = childTimes.size() - 1; i > -1; i--) {
+//                        HashMap<String, String> hashMap = new HashMap<>();
+//                        hashMap.put("name", childTimes.get(i).getName());
+//                        hashMap.put("icon", childTimes.get(i).getIcon());
+//                        hashMap.put("content", childTimes.get(i).getContent());
+//                        hashMap.put("picture", childTimes.get(i).getPicture());
+//                        hashMap.put("comment", childTimes.get(i).getComment());
+//                        hashMap.put("favorite", childTimes.get(i).getFavorite());
+//                        String date = sdf.format(new Date(Integer.parseInt(childTimes.get(i).getCreate_time()) * 1000L));
+//                        hashMap.put("time", date);
+//                        datas.add(hashMap);
+//                    }
                     for (ChildTime childTime : childTimes) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put("name", childTime.getName());
@@ -136,7 +153,6 @@ public class ChildTimeActivity extends AppCompatActivity {
                         String date = sdf.format(new Date(Integer.parseInt(childTime.getCreate_time()) * 1000L));
                         hashMap.put("time", date);
                         datas.add(hashMap);
-
                     }
 //                    for (int i = 0; i < 3; i++) {
 //                        HashMap<String, String> hashMap = new HashMap<>();
@@ -165,17 +181,25 @@ public class ChildTimeActivity extends AppCompatActivity {
         imageLoader.init(MyApplication.setConfiguration(context));
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_child_time);
+
         adapter = new ChildTimeRecyclerAdapter(context, datas);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        linearLayoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
         handler = new Handler() {
+            int count = 0;
+
             @Override
             public void handleMessage(Message msg) {
                 //操作界面
                 switch (msg.what) {
                     case 0x01:
-                        adapter.addItem(datas);
+                        System.out.println("datas: " + datas.size());
+//                        adapter.addItem(datas);
+                        System.out.println(count + "-------------------------------");
+                        count++;
                         break;
                     case 0x02:
                         name.setText(str_name);
@@ -187,6 +211,10 @@ public class ChildTimeActivity extends AppCompatActivity {
         };
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -197,13 +225,106 @@ public class ChildTimeActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            adapter.datas.clear();
+            adapter.notifyDataSetChanged();
+            if (requestCode == 1) {
+                HashMap<String, String> paramsMap = new HashMap<>();
+                OkHttpUtils okHttpUtils = OkHttpUtils.getInstance(this);
+
+                SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_TEL, MODE_PRIVATE);
+                String tel = sharedPreferences.getString("tel", "null");
+                final String url = IP.IP_PARENT + "/getTimeline";
+                paramsMap.put("tel", tel);
+//                HashMap<String, String> str = (HashMap<String, String>) data.getSerializableExtra("data");
+//                System.out.println("sdfdfsd-------" + str);
+//                String local = data.getStringExtra("local");
+//                System.out.println("local:" + local);
+////                Bundle bundle = getIntent().getExtras();
+////                Serializable map = (Serializable) bundle.get("data");
+//                HashMap<String, String> hashMap = new HashMap<>();
+//
+//
+////                hashMap.put("icon", );
+//                hashMap.put("content", str.get("content"));
+////                hashMap.put("picture", childTime.getPicture());
+////                hashMap.put("comment", childTime.getComment());
+////                hashMap.put("favorite", childTime.getFavorite());
+//                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm:ss");
+//                String date = sdf.format(new Date(Integer.parseInt(str.get("time")) * 1000L));
+//                hashMap.put("time", date);
+//                adapter.addItem(hashMap);
+                okHttpUtils.postAsyn(url, paramsMap, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println("联合表： " + res);
+                        Gson gson = new Gson();
+                        UserBase<ChildTime> user = gson.fromJson(res, new TypeToken<UserBase<ChildTime>>() {
+                        }.getType());
+                        final List<ChildTime> childTimes = user.getMessage();
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm:ss");
+
+//                        if (user.getCode().equals("10000")) {
+////                            HashMap<String, String> hashMap = new HashMap<>();
+////                            hashMap.put("name", childTimes.get(childTimes.size() - 1).getName());
+////                            hashMap.put("icon", childTimes.get(childTimes.size() - 1).getIcon());
+////                            hashMap.put("content", childTimes.get(childTimes.size() - 1).getContent());
+////                            hashMap.put("picture", childTimes.get(childTimes.size() - 1).getPicture());
+////                            hashMap.put("comment", childTimes.get(childTimes.size() - 1).getComment());
+////                            hashMap.put("favorite", childTimes.get(childTimes.size() - 1).getFavorite());
+////                            String date = sdf.format(new Date(Integer.parseInt(childTimes.get(childTimes.size() - 1).getCreate_time()) * 1000L));
+////                            hashMap.put("time", date);
+////                            datas.add(hashMap);
+//                            HashMap<String, String> hashMap = new HashMap<>();
+//                            hashMap.put("name", childTimes.get(0).getName());
+//                            hashMap.put("icon", childTimes.get(0).getIcon());
+//                            hashMap.put("content", childTimes.get(0).getContent());
+//                            hashMap.put("picture", childTimes.get(0).getPicture());
+//                            hashMap.put("comment", childTimes.get(0).getComment());
+//                            hashMap.put("favorite", childTimes.get(0).getFavorite());
+//                            String date = sdf.format(new Date(Integer.parseInt(childTimes.get(childTimes.size() - 1).getCreate_time()) * 1000L));
+//                            hashMap.put("time", date);
+//                            datas.add(hashMap);
+//                        }
+                        for (ChildTime childTime : childTimes) {
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("name", childTime.getName());
+                            hashMap.put("icon", childTime.getIcon());
+                            hashMap.put("content", childTime.getContent());
+                            hashMap.put("picture", childTime.getPicture());
+                            hashMap.put("comment", childTime.getComment());
+                            hashMap.put("favorite", childTime.getFavorite());
+                            String date = sdf.format(new Date(Integer.parseInt(childTime.getCreate_time()) * 1000L));
+                            hashMap.put("time", date);
+                            datas.add(hashMap);
+                        }
+                    }
+                });
+            }
+            adapter.notifyDataSetChanged();
+            adapter.addItemNotify(datas);
+
+        }
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;
             case R.id.action_publish:
-                startActivity(new Intent(this, PublishTimeActivity.class));
+                startActivityForResult(new Intent(this, PublishTimeActivity.class), 1);
+//                startActivity(new Intent(this, PublishTimeActivity.class));
                 break;
             default:
                 return super.onOptionsItemSelected(item);

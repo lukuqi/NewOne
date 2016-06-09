@@ -32,10 +32,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     public NewsRecyclerAdapter(Context context, List<HashMap<String, String>> datas) {
         this.context = context;
+        this.datas = datas;
         mLayoutInflater = LayoutInflater.from(context);
         imageLoader = ImageLoader.getInstance();
         imageLoader.init(MyApplication.setConfiguration(context));
-        this.datas = datas;
     }
 
 
@@ -121,7 +121,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         notifyDataSetChanged();
     }
 
-   static class NewsViewHolder extends RecyclerView.ViewHolder {
+    static class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView title, content, source;
         ImageView image;
         RelativeLayout item;

@@ -89,24 +89,32 @@ public class PublishTimeActivity extends AppCompatActivity {
         publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OkHttpUtils okHttpUtils = OkHttpUtils.getInstance(context);
-                String url = IP.IP_PARENT + "/uploadImage";
+                OkHttpUtils okHttpUtils = OkHttpUtils.getInstance(context); //初始化网络访问工具
+                String url = IP.IP_PARENT + "/uploadImage"; //接口地址
+                //访问参数map tel：手机号码 content：动态内容内容 time：发布时间
                 HashMap<String, String> paramsMap = new HashMap<>();
-                SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_TEL, MODE_PRIVATE);
-                String tel = sharedPreferences.getString("tel", "null");
+                SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_TEL, MODE_PRIVATE);//new SharedPreferences对象
+                String tel = sharedPreferences.getString("tel", "null"); //获取tel电话号码的值
                 paramsMap.put("tel", tel);
                 paramsMap.put("content", publish_content.getText().toString());
                 paramsMap.put("time", Long.toString(System.currentTimeMillis()).substring(0, 10));
-                final ProgressDialog progressDialog = ProgressDialog.show(PublishTimeActivity.this, null, "请稍等...", true, false);
+                final ProgressDialog progressDialog = ProgressDialog.show(PublishTimeActivity.this, null, "请稍等...", true, false);//进度条
                 TimerTask task = new TimerTask() {
                     public void run() {
                         progressDialog.dismiss();
                         finish();
                     }
                 };
+                Intent intent = new Intent();
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("data",paramsMap);
+//                intent.putExtras(bundle);
+                intent.putExtra("data", paramsMap);
+                intent.putExtra("local", "local");
+                setResult(1, intent);//返回结果数据
                 Timer timer = new Timer();
                 timer.schedule(task, 500);
-
+                //进行网络操作
                 okHttpUtils.postMutilFileAsyn(url, paramsMap, files, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {

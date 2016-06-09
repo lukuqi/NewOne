@@ -17,10 +17,12 @@ import com.lukuqi.newone.R;
 import com.lukuqi.newone.http.OkHttpUtils;
 import com.lukuqi.newone.util.IP;
 import com.lukuqi.newone.util.Utils;
+import com.lukuqi.newone.util.XmppConn;
 
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -103,6 +105,7 @@ public class RegisterTwoActivity extends AppCompatActivity {
 //                                intent.putExtras(bundle);
 //                                intent.putExtra(LoginActivity.EXTRA_PARAM,verify_phone);
 //                                startActivity(intent);
+                                regChat(verify_phone);//注册聊天账号
                                 startActivity(new Intent(RegisterTwoActivity.this, LoginActivity.class));
                                 finish();
                             } else {
@@ -119,6 +122,25 @@ public class RegisterTwoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * 聊天服务器注册账号
+     */
+    public void regChat(final String tel) {
+        final XmppConn xmppConn = XmppConn.getInstance();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("running...");
+                xmppConn.login("admin", "admin");
+                Map<String, String> attributes = new HashMap<>();
+                attributes.put("username", tel);
+                attributes.put("name", tel);
+                attributes.put("password", tel);
+                XmppConn.getInstance().createAccount(attributes);
+            }
+        }).start();
     }
 
     @Override

@@ -170,13 +170,14 @@ public class RegisterOneActivity extends AppCompatActivity {
      * @param phone 手机号码
      */
     public void register(final String phone) {
-        String url = IP.IP_SMS + "/sendRegisterSMS";
-        okHttpUtils = OkHttpUtils.getInstance(getApplicationContext());
+        String url = IP.IP_SMS + "/sendRegisterSMS"; //接口访问地址
+        okHttpUtils = OkHttpUtils.getInstance(getApplicationContext()); //网络请求工具
+        //保存请求参数map，to:手机号码 datas：模板内容 tempId：默认短信模板
         HashMap<String, String> paramsMap = new HashMap<>();
         paramsMap.put("to", phone);
         paramsMap.put("datas", "null");
         paramsMap.put("tempId", "1");
-
+        //post的请求
         okHttpUtils.postAsyn(url, paramsMap, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -191,14 +192,14 @@ public class RegisterOneActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String res = response.body().string();
+                String res = response.body().string(); //获取返回内容
                 System.out.println("发送注册验证码：" + res);
-                Gson gson = new Gson();
+                Gson gson = new Gson(); //新建Json对象
                 final Base base = gson.fromJson(res, Base.class);
                 if (base.getCode().equals("10000")) {
-                    Intent intent = new Intent(RegisterOneActivity.this, RegisterTwoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Number", phone);
+                    Intent intent = new Intent(RegisterOneActivity.this, RegisterTwoActivity.class);//activity界面跳转
+                    Bundle bundle = new Bundle();//new Bundle对象
+                    bundle.putString("Number", phone);//传入手机号码
                     intent.putExtras(bundle);
                     startActivity(intent);
                     finish();

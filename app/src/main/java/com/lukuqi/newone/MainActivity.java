@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.lukuqi.newone.activity.AboutActivity;
+import com.lukuqi.newone.activity.SearchActivity;
 import com.lukuqi.newone.adapter.ViewPagerAdapter;
 import com.lukuqi.newone.fragment.DiscyFragment;
 import com.lukuqi.newone.fragment.ExpertFragment;
@@ -131,8 +132,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent);
+                Intent setting_intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(setting_intent);
+                break;
+            case R.id.action_search:
+                Intent search_intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(search_intent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

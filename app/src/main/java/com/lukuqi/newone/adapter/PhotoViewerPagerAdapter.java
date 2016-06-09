@@ -26,7 +26,7 @@ public class PhotoViewerPagerAdapter extends PagerAdapter {
         this.views = views;
         this.datas = datas;
         imageLoader = ImageLoader.getInstance();
-        imageLoader.init(MyApplication.setConfiguration(context));
+//        imageLoader.init(MyApplication.setConfiguration(context));
     }
 
     @Override

@@ -21,29 +21,77 @@
             android:id="@+id/tv_time_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="一点半"
             android:layout_alignBottom="@+id/cIamge_time_user"
-            android:layout_toRightOf="@+id/cIamge_time_user"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/cIamge_time_user"
-            android:layout_marginBottom="10dp" />
+            android:layout_toRightOf="@+id/cIamge_time_user"
+            android:text="一点半" />
 
         <TextView
             android:id="@+id/tv_time_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dsfsfawefefewfa"
             android:layout_below="@+id/cIamge_time_user"
+            android:layout_toEndOf="@+id/cIamge_time_user"
             android:layout_toRightOf="@+id/cIamge_time_user"
-            android:layout_toEndOf="@+id/cIamge_time_user" />
+            android:text="dsfsfawefefewfa" />
+
+        <LinearLayout
+            android:id="@+id/ll_picture"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/tv_time_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_pic_1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_pic_2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_pic_3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_pic_4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tv_time_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/tv_time_content"
-            android:text="shijian" />
+            android:layout_below="@+id/ll_picture"
+            android:text="time" />
 
         <View
             android:layout_width="match_parent"

@@ -78,6 +78,7 @@
 
 
         <LinearLayout
+
             android:id="@+id/ll_publish_image_r2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

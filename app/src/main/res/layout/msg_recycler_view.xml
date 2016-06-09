@@ -13,10 +13,10 @@
         android:layout_marginRight="14dp"
         android:layout_marginTop="14dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImage"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/avatar" />
 
@@ -24,15 +24,15 @@
             android:id="@+id/txt_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView"
+            android:layout_alignLeft="@+id/txt_last_message"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/textView"
+            android:layout_alignStart="@+id/txt_last_message"
             android:text="小秘书"
             android:textColor="@color/colorName"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txt_last_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/circleImage"
@@ -41,7 +41,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txt_date"
+            android:id="@+id/txt_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/txt_name"

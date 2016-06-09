@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+
 
     defaultConfig {
         applicationId "com.lukuqi.newone"
@@ -10,6 +12,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -17,6 +21,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+    }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
 }
 
 dependencies {
@@ -33,9 +49,20 @@ dependencies {
     compile 'org.jsoup:jsoup:1.9.1'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile project(':multi-image-selector')
+    compile files('libs/umeng-update-v2.7.0.jar')
+    compile files('libs/com.umeng.fb.5.4.0.jar')
+
+    compile 'org.jxmpp:jxmpp-core:0.5.0-alpha7'
+    compile 'org.jxmpp:jxmpp-util-cache:0.5.0-alpha7'
+    compile 'org.igniterealtime.smack:smack-tcp:4.2.0-beta1'
+    compile 'org.igniterealtime.smack:smack-android-extensions:4.2.0-beta1'
+    compile 'org.igniterealtime.smack:smack-experimental:4.2.0-beta1'
 }
+
 allprojects {
     repositories {
         mavenCentral()
     }
 }
+
+

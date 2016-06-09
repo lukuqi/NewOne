@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">NewOne</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <string name="action_settings">关于</string>
+    <string name="action_publish">发表</string>
+    <string name="action_search">添加好友</string>
+    <string name="internet_connection">网络连接失败，请检查你的网络设置</string>
+    <string name="copy_right">CopyRight@2015-2016</string>
+    <string name="title_activity_about">关于</string>
+    <string name="introduction_detail">学校和家长的沟通工具，家长与家长的交流社区，专家与家长的互动场所！ \n \n新浪微博“一点半的胡茬” 链接\nhttp://weibo.com/bubudding  \nApp有任何BUG和问题，欢迎与作者联系 ^_^</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register_one">手机号注册</string>
+    <string name="title_activity_register_two">验证码</string>
+    <string name="title_activity_forget_pwd">密码找回</string>
+    <string name="title_activity_forget_pwd_two">验证码</string>
+    <string name="title_activity_forget_pwd_three">设置密码</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="title_activity_album">我的相册</string>
+    <string name="title_activity_school">我的学校</string>
+    <string name="title_activity_profile_setting">资料</string>
+    <string name="title_activity_name_edit">名字</string>
+    <string name="title_activity_area_edit">区域</string>
+    <string name="title_activity_signature_edit">个性签名</string>
+    <string name="title_activity_news">中小学新闻</string>
+    <string name="title_activity_news_details"></string>
+    <string name="title_activity_child_time">时光</string>
+    <string name="title_activity_publish_time"></string>
+    <string name="title_activity_photo_viewer">PhotoViewerActivity</string>
+</resources>

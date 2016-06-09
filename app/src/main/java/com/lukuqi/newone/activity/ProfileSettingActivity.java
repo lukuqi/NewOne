@@ -250,13 +250,18 @@ public class ProfileSettingActivity extends AppCompatActivity {
                     tv_sex.setText((cur.getInt(sexColumn) == 1) ? "男" : "女");
                     tv_area.setText(cur.getString(areaColumn));
                     tv_signature.setText(cur.getString(signatureColumn));
-//                    System.out.println("numColumn: " + cur.getString(nameColumn) + "" + ((cur.getString(sexColumn).equals("1")) ? "男" : "女") + cur.getString(areaColumn) + cur.getString(signatureColumn));
+//                  System.out.println("numColumn: " + cur.getString(nameColumn) + "" + ((cur.getString(sexColumn).equals("1")) ? "男" : "女") + cur.getString(areaColumn) + cur.getString(signatureColumn));
                 } while (cur.moveToNext());
+            } else {
+                updateInfo(); //本地数据库未存储数据，从网络获取
             }
         }
         db.close();
     }
 
+    /**
+     * 从网络更新个人资料
+     */
     private void updateInfo() {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantVar.USER_INFO_CHANGED, MODE_PRIVATE);
         String flag = sharedPreferences.getString("change", "null");
@@ -280,7 +285,8 @@ public class ProfileSettingActivity extends AppCompatActivity {
                     String res = response.body().string();
                     System.out.println("获取个人信息" + res);
                     Gson gson = new Gson();
-                    UserBase<UserInfo> user = gson.fromJson(res, new TypeToken<UserBase<UserInfo>>(){}.getType());
+                    UserBase<UserInfo> user = gson.fromJson(res, new TypeToken<UserBase<UserInfo>>() {
+                    }.getType());
                     final List<UserInfo> userInfos = user.getMessage();
                     if (user.getCode().equals("10000")) {
                         runOnUiThread(new Runnable() {
@@ -366,11 +372,11 @@ public class ProfileSettingActivity extends AppCompatActivity {
                     try {
                         File fileName = CheckDir.checkImageFile("icon.png");
                         System.out.println("fileName: " + fileName);
-                         fos = new FileOutputStream(fileName);
+                        fos = new FileOutputStream(fileName);
                         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);// 把数据写入文件
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }finally {
+                    } finally {
 
                         try {
                             fos.flush();
@@ -379,8 +385,6 @@ public class ProfileSettingActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-
-
 
 
 //                    File file = new File(path);

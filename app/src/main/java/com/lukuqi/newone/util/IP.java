@@ -6,7 +6,8 @@ package com.lukuqi.newone.util;
  * Created by right on 2016/3/15.
  */
 public class IP {
-    public final static String HOST = "http://114.215.144.131/NewOne";
+//    public final static String HOST = "http://114.215.144.131/NewOne"; //服务器ip地址
+    public final static String HOST = "http://100.72.10.152/NewOne";
     //测试
 //    public final static String HOST="118.112.201.164/NewOne/Home";
 
